@@ -1,5 +1,9 @@
 # pi-nested-agents-md
 
+[![ci](https://github.com/code-yeongyu/pi-nested-agents-md/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/code-yeongyu/pi-nested-agents-md/actions/workflows/ci.yml)
+[![license](https://img.shields.io/github/license/code-yeongyu/pi-nested-agents-md?style=flat-square)](LICENSE)
+[![node](https://img.shields.io/node/v/@code-yeongyu/pi-nested-agents-md?style=flat-square)](package.json)
+
 > **From [omo (oh-my-openagent)](https://github.com/code-yeongyu/oh-my-openagent)** — ported to [pi-mono](https://github.com/badlogic/pi-mono)'s coding-agent extension API.
 
 A pi-mono coding-agent extension that automatically injects nearby `AGENTS.md` files into the agent's context whenever it reads a file in a nested directory. When the agent reads `src/components/Button.tsx`, this extension finds `src/AGENTS.md` and `src/components/AGENTS.md`, attaches their contents to the read tool result, and the agent gets the surrounding directory's rules without you having to paste them yourself.
