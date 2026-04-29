@@ -32,7 +32,8 @@
 		"build": "echo 'nothing to build'",
 		"check": "tsc --noEmit",
 		"test": "vitest --run",
-		"test:watch": "vitest"
+		"test:watch": "vitest",
+		"smoke": "tsx scripts/smoke.ts"
 	},
 	"files": [
 		"src",
@@ -44,6 +45,7 @@
 		"@mariozechner/pi-ai": "^0.70.6",
 		"@mariozechner/pi-coding-agent": "^0.70.6",
 		"@types/node": "^22.10.5",
+		"tsx": "^4.20.3",
 		"typescript": "^5.7.3",
 		"vitest": "^3.2.4"
 	},
