@@ -1,0 +1,53 @@
+{
+	"name": "@code-yeongyu/pi-nested-agents-md",
+	"version": "0.1.0",
+	"description": "Nested AGENTS.md injection for pi-mono coding-agent. Ported from oh-my-openagent (omo).",
+	"type": "module",
+	"private": false,
+	"license": "MIT",
+	"author": "YeonGyu Kim <code.yeon.gyu@gmail.com>",
+	"homepage": "https://github.com/code-yeongyu/pi-nested-agents-md",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/code-yeongyu/pi-nested-agents-md.git"
+	},
+	"keywords": [
+		"pi",
+		"pi-mono",
+		"pi-coding-agent",
+		"extension",
+		"agents-md",
+		"claude-md",
+		"nested-context",
+		"omo",
+		"oh-my-openagent"
+	],
+	"pi": {
+		"extensions": [
+			"./src/index.ts"
+		]
+	},
+	"scripts": {
+		"clean": "rm -rf dist *.tsbuildinfo",
+		"build": "echo 'nothing to build'",
+		"check": "tsc --noEmit",
+		"test": "vitest --run",
+		"test:watch": "vitest"
+	},
+	"files": [
+		"src",
+		"README.md",
+		"LICENSE"
+	],
+	"dependencies": {},
+	"devDependencies": {
+		"@mariozechner/pi-ai": "^0.70.6",
+		"@mariozechner/pi-coding-agent": "^0.70.6",
+		"@types/node": "^22.10.5",
+		"typescript": "^5.7.3",
+		"vitest": "^3.2.4"
+	},
+	"engines": {
+		"node": ">=20.6.0"
+	}
+}
