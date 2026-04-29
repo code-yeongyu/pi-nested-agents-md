@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatDirectoryContext } from "../src/core/format";
+import { formatDirectoryContext } from "../src/core/format.js";
 
 describe("formatDirectoryContext", () => {
 	it("renders the omo-exact directory-context block when content is not truncated", () => {

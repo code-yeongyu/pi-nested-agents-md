@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { InjectionCache } from "../src/core/injection-cache";
+import { InjectionCache } from "../src/core/injection-cache.js";
 
 describe("InjectionCache", () => {
 	it("reports a directory as injected after marking it for a session", () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { truncateBytes } from "../src/core/truncate";
+import { truncateBytes } from "../src/core/truncate.js";
 
 describe("truncateBytes", () => {
 	it("returns the original content when smaller than the maxBytes budget", () => {

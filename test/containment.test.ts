@@ -1,7 +1,7 @@
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { resolveAndContain } from "../src/core/containment";
-import { createTestTree } from "./fixtures/create-tree";
+import { resolveAndContain } from "../src/core/containment.js";
+import { createTestTree } from "./fixtures/create-tree.js";
 
 describe("resolveAndContain", () => {
 	it("returns canonical paths when the file is inside the project root", async () => {

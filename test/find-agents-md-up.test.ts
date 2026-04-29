@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { findAgentsMdUp } from "../src/core/find-agents-md-up";
-import { createTestTree, type TestTree } from "./fixtures/create-tree";
+import { findAgentsMdUp } from "../src/core/find-agents-md-up.js";
+import { createTestTree, type TestTree } from "./fixtures/create-tree.js";
 
 describe("findAgentsMdUp", () => {
 	it("returns nested AGENTS.md outermost-first and excludes the project root file", async () => {
