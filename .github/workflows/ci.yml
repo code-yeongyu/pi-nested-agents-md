@@ -11,19 +11,25 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
-  ci:
-    name: typecheck + test + smoke (node ${{ matrix.node }})
-    runs-on: ubuntu-latest
+  test:
+    name: test (${{ matrix.os }} · node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
-        node: ["20.x", "22.x"]
+        os: [ubuntu-latest, macos-latest]
+        node: ["20", "22"]
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v6
+      - name: Setup Node ${{ matrix.node }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           cache: npm
@@ -31,11 +37,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Typecheck (tsc --noEmit)
+      - name: Check (tsgo + biome)
         run: npm run check
 
-      - name: Tests (vitest --run)
+      - name: Unit tests
         run: npm test
 
       - name: Smoke (end-to-end injection)
         run: npm run smoke
+
+      - name: Package smoke
+        run: npm pack --dry-run
