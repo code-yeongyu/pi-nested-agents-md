@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import nestedAgentsMd from "../src/index.js";
-import { createFakePi } from "./fixtures/fake-pi.js";
 import { createTestTree } from "./fixtures/create-tree.js";
+import { createFakePi } from "./fixtures/fake-pi.js";
 
 interface TextBlock {
 	type: "text";
@@ -68,10 +68,9 @@ describe("TUI integration", () => {
 			await fake.emit("session_start", { reason: "startup" });
 
 			// when
-			const result = (await fake.emit(
-				"tool_result",
-				makeReadEvent(tree.path("src/file.ts")),
-			)) as { content: TextBlock[] };
+			const result = (await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")))) as {
+				content: TextBlock[];
+			};
 
 			// then
 			expect(fake.captured.statuses).toEqual([]);
@@ -98,19 +97,12 @@ describe("TUI integration", () => {
 			await fake.emit("session_start", { reason: "startup" });
 
 			// when
-			const result = await fake.emit(
-				"tool_result",
-				makeReadEvent(tree.path("src/file.ts")),
-			);
+			const result = await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")));
 
 			// then
 			expect(result).toBeUndefined();
-			expect(
-				fake.captured.statuses.every((entry) => entry.text === undefined),
-			).toBe(true);
-			expect(
-				fake.captured.widgets.every((entry) => entry.lines === undefined),
-			).toBe(true);
+			expect(fake.captured.statuses.every((entry) => entry.text === undefined)).toBe(true);
+			expect(fake.captured.widgets.every((entry) => entry.lines === undefined)).toBe(true);
 		} finally {
 			await tree.cleanup();
 		}
@@ -138,9 +130,7 @@ describe("TUI integration", () => {
 			expect(widget?.placement).toBe("aboveEditor");
 			expect(widget?.lines?.[0]).toBe("[accent]Nested Context:[/accent]");
 			expect(widget?.lines?.some((line) => line.includes("src/AGENTS.md"))).toBe(true);
-			expect(
-				widget?.lines?.some((line) => line.includes("src/components/AGENTS.md")),
-			).toBe(true);
+			expect(widget?.lines?.some((line) => line.includes("src/components/AGENTS.md"))).toBe(true);
 		} finally {
 			await tree.cleanup();
 		}
@@ -215,11 +205,7 @@ describe("TUI integration", () => {
 
 			// then
 			const widget = fake.captured.widgets.at(-1);
-			expect(
-				widget?.lines?.some(
-					(line) => line.startsWith("[warning]") && line.includes("(truncated)"),
-				),
-			).toBe(true);
+			expect(widget?.lines?.some((line) => line.startsWith("[warning]") && line.includes("(truncated)"))).toBe(true);
 		} finally {
 			await tree.cleanup();
 		}

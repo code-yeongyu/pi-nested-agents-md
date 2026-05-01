@@ -11,14 +11,10 @@ export interface ResolveAndContainInput {
 	rootDir: string;
 }
 
-export async function resolveAndContain(
-	input: ResolveAndContainInput,
-): Promise<ContainmentResult | null> {
+export async function resolveAndContain(input: ResolveAndContainInput): Promise<ContainmentResult | null> {
 	if (!input.filePath) return null;
 
-	const resolvedPath = isAbsolute(input.filePath)
-		? input.filePath
-		: resolve(input.rootDir, input.filePath);
+	const resolvedPath = isAbsolute(input.filePath) ? input.filePath : resolve(input.rootDir, input.filePath);
 
 	let canonicalRoot: string;
 	let canonicalPath: string;

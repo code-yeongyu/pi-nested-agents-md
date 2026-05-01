@@ -38,10 +38,7 @@ export interface FakePi {
 				handler: (args: string, ctx: unknown) => Promise<void> | void;
 			},
 		): void;
-		registerFlag(
-			name: string,
-			options: { description?: string; type?: string; default?: unknown },
-		): void;
+		registerFlag(name: string, options: { description?: string; type?: string; default?: unknown }): void;
 		getFlag(name: string): unknown;
 		appendEntry(customType: string, data?: unknown): void;
 	};
@@ -54,11 +51,7 @@ export interface FakePi {
 			theme: { fg(color: string, text: string): string };
 			notify(message: string, level?: string): void;
 			setStatus(key: string, text: string | undefined): void;
-			setWidget(
-				key: string,
-				lines: string[] | undefined,
-				options?: { placement?: string },
-			): void;
+			setWidget(key: string, lines: string[] | undefined, options?: { placement?: string }): void;
 		};
 	};
 	captured: {
@@ -77,10 +70,7 @@ export interface FakePi {
 
 export function createFakePi(options: FakePiOptions): FakePi {
 	const handlers = new Map<string, EventHandler[]>();
-	const commands = new Map<
-		string,
-		(args: string, ctx: unknown) => Promise<void> | void
-	>();
+	const commands = new Map<string, (args: string, ctx: unknown) => Promise<void> | void>();
 	const flagValues: Record<string, unknown> = { ...(options.flagValues ?? {}) };
 	const captured: FakePi["captured"] = {
 		statuses: [],
@@ -105,8 +95,7 @@ export function createFakePi(options: FakePiOptions): FakePi {
 			theme: { fg: (color, text) => `[${color}]${text}[/${color}]` },
 			notify: (message, level) => captured.notifications.push({ message, level }),
 			setStatus: (key, text) => captured.statuses.push({ key, text }),
-			setWidget: (key, lines, opts) =>
-				captured.widgets.push({ key, lines, placement: opts?.placement }),
+			setWidget: (key, lines, opts) => captured.widgets.push({ key, lines, placement: opts?.placement }),
 		},
 	};
 

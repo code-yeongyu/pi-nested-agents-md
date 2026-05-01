@@ -135,10 +135,7 @@ describe("findAgentsMdUp", () => {
 			});
 
 			// then
-			expect(found).toEqual([
-				tree.path("src/AGENTS.md"),
-				tree.path("src/components/CLAUDE.md"),
-			]);
+			expect(found).toEqual([tree.path("src/AGENTS.md"), tree.path("src/components/CLAUDE.md")]);
 		} finally {
 			await tree.cleanup();
 		}

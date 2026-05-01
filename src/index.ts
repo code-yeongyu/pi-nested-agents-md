@@ -78,10 +78,7 @@ export default function nestedAgentsMd(pi: ExtensionAPI): void {
 		if (widgetVisible) updateWidget(ctx, true, [...metaMap.values()]);
 
 		return {
-			content: [
-				...event.content,
-				{ type: "text" as const, text: result.injectedText },
-			],
+			content: [...event.content, { type: "text" as const, text: result.injectedText }],
 		};
 	});
 
@@ -114,9 +111,7 @@ export default function nestedAgentsMd(pi: ExtensionAPI): void {
 			updateWidget(ctx, widgetVisible, files);
 			pi.appendEntry(ENTRY_TYPE_DEBUG, buildDebugRecord({ cache, sessionKey, files }));
 			ctx.ui.notify(
-				widgetVisible
-					? "Nested AGENTS.md context widget shown"
-					: "Nested AGENTS.md context widget hidden",
+				widgetVisible ? "Nested AGENTS.md context widget shown" : "Nested AGENTS.md context widget hidden",
 				"info",
 			);
 		},

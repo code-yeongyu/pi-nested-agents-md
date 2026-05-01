@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { InjectionCache } from "../src/core/injection-cache.js";
 import { injectDirectoryContext } from "../src/core/inject-directory-context.js";
+import { InjectionCache } from "../src/core/injection-cache.js";
 import { createTestTree } from "./fixtures/create-tree.js";
 
 interface TextBlock {
@@ -29,10 +29,7 @@ interface MiddlewareContext {
 	sessionKey: string;
 }
 
-type Handler = (
-	event: ReadToolResultLike,
-	ctx: MiddlewareContext,
-) => Promise<{ content?: Block[] } | undefined>;
+type Handler = (event: ReadToolResultLike, ctx: MiddlewareContext) => Promise<{ content?: Block[] } | undefined>;
 
 async function runMiddleware(
 	event: ReadToolResultLike,
@@ -81,9 +78,7 @@ describe("tool_result middleware integration", () => {
 		const cache = new InjectionCache();
 		const ctx: MiddlewareContext = { cwd: tree.root, cache, sessionKey: "session-1" };
 		const priorHandler: Handler = async (event) => ({
-			content: event.content.map((b) =>
-				b.type === "text" ? ({ type: "text", text: "modified" } as TextBlock) : b,
-			),
+			content: event.content.map((b) => (b.type === "text" ? ({ type: "text", text: "modified" } as TextBlock) : b)),
 		});
 		const event: ReadToolResultLike = {
 			toolName: "read",

@@ -1,7 +1,7 @@
 import { chmod } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
-import { InjectionCache } from "../src/core/injection-cache.js";
 import { injectDirectoryContext } from "../src/core/inject-directory-context.js";
+import { InjectionCache } from "../src/core/injection-cache.js";
 import { createTestTree } from "./fixtures/create-tree.js";
 
 describe("injectDirectoryContext", () => {
@@ -197,9 +197,7 @@ describe("injectDirectoryContext", () => {
 			// then
 			expect(result.injectedFiles).toHaveLength(1);
 			expect(result.injectedFiles[0]?.truncated).toBe(true);
-			expect(result.injectedText).toContain(
-				"[Note: Content was truncated to save context window space.",
-			);
+			expect(result.injectedText).toContain("[Note: Content was truncated to save context window space.");
 		} finally {
 			await tree.cleanup();
 		}

@@ -24,9 +24,11 @@ describe("formatDirectoryContext", () => {
 
 		// then
 		expect(formatted.startsWith("\n\n[Directory Context: /abs/repo/src/AGENTS.md]\nhead")).toBe(true);
-		expect(formatted.endsWith(
-			"[Note: Content was truncated to save context window space. For full context, please read the file directly: /abs/repo/src/AGENTS.md]",
-		)).toBe(true);
+		expect(
+			formatted.endsWith(
+				"[Note: Content was truncated to save context window space. For full context, please read the file directly: /abs/repo/src/AGENTS.md]",
+			),
+		).toBe(true);
 	});
 
 	it("formats the directory-context header even when the content is empty", () => {

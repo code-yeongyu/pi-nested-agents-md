@@ -28,12 +28,7 @@ export interface InjectedFileMeta {
 	truncated: boolean;
 }
 
-export function updateStatus(
-	ctx: UiSurface,
-	cache: InjectionCache,
-	sessionKey: string,
-	hasErrors: boolean,
-): void {
+export function updateStatus(ctx: UiSurface, cache: InjectionCache, sessionKey: string, hasErrors: boolean): void {
 	if (!ctx.hasUI || !ctx.ui?.setStatus) return;
 	const count = cache.getCacheSize(sessionKey);
 	if (count === 0) {
@@ -51,11 +46,7 @@ export function clearStatus(ctx: UiSurface): void {
 	ctx.ui.setStatus(STATUS_KEY, undefined);
 }
 
-export function updateWidget(
-	ctx: UiSurface,
-	visible: boolean,
-	files: InjectedFileMeta[],
-): void {
+export function updateWidget(ctx: UiSurface, visible: boolean, files: InjectedFileMeta[]): void {
 	if (!ctx.hasUI || !ctx.ui?.setWidget) return;
 	if (!visible || files.length === 0) {
 		ctx.ui.setWidget(WIDGET_KEY, undefined);

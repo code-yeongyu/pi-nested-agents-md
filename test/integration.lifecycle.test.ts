@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import nestedAgentsMd from "../src/index.js";
-import { createFakePi } from "./fixtures/fake-pi.js";
 import { createTestTree } from "./fixtures/create-tree.js";
+import { createFakePi } from "./fixtures/fake-pi.js";
 
 interface TextBlock {
 	type: "text";
@@ -40,26 +40,23 @@ describe("lifecycle integration", () => {
 		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
-			const first = (await fake.emit(
-				"tool_result",
-				makeReadEvent(tree.path("src/file.ts")),
-			)) as { content: TextBlock[] } | undefined;
+			const first = (await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")))) as
+				| { content: TextBlock[] }
+				| undefined;
 			expect(first?.content).toBeDefined();
 			expect(first?.content[1]?.text).toContain("# src rules");
 
-			const cached = (await fake.emit(
-				"tool_result",
-				makeReadEvent(tree.path("src/file.ts")),
-			)) as { content?: TextBlock[] } | undefined;
+			const cached = (await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")))) as
+				| { content?: TextBlock[] }
+				| undefined;
 			expect(cached).toBeUndefined();
 
 			await fake.emit("session_compact", {});
 
 			// when
-			const afterCompact = (await fake.emit(
-				"tool_result",
-				makeReadEvent(tree.path("src/file.ts")),
-			)) as { content: TextBlock[] } | undefined;
+			const afterCompact = (await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")))) as
+				| { content: TextBlock[] }
+				| undefined;
 
 			// then
 			expect(afterCompact?.content).toBeDefined();
@@ -79,19 +76,17 @@ describe("lifecycle integration", () => {
 		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
-			const aFirst = (await fake.emit(
-				"tool_result",
-				makeReadEvent(tree.path("src/file.ts")),
-			)) as { content: TextBlock[] } | undefined;
+			const aFirst = (await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")))) as
+				| { content: TextBlock[] }
+				| undefined;
 			expect(aFirst?.content[1]?.text).toContain("# src rules");
 
 			fake.setSessionFile("/sessions/B.jsonl");
 
 			// when
-			const bFirst = (await fake.emit(
-				"tool_result",
-				makeReadEvent(tree.path("src/file.ts")),
-			)) as { content: TextBlock[] } | undefined;
+			const bFirst = (await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")))) as
+				| { content: TextBlock[] }
+				| undefined;
 
 			// then
 			expect(bFirst?.content[1]?.text).toContain("# src rules");
@@ -114,10 +109,9 @@ describe("lifecycle integration", () => {
 
 			// when
 			await fake.emit("session_shutdown", { reason: "quit" });
-			const afterShutdown = (await fake.emit(
-				"tool_result",
-				makeReadEvent(tree.path("src/file.ts")),
-			)) as { content?: TextBlock[] } | undefined;
+			const afterShutdown = (await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")))) as
+				| { content?: TextBlock[] }
+				| undefined;
 
 			// then
 			expect(afterShutdown?.content?.[1]?.text).toContain("# src rules");

@@ -29,9 +29,7 @@ const EMPTY_RESULT: InjectionResult = Object.freeze({
 	errors: [],
 }) as InjectionResult;
 
-export async function injectDirectoryContext(
-	input: InjectDirectoryContextInput,
-): Promise<InjectionResult> {
+export async function injectDirectoryContext(input: InjectDirectoryContextInput): Promise<InjectionResult> {
 	const config = resolveConfig(input.config);
 
 	const contained = await resolveAndContain({

@@ -76,9 +76,7 @@ async function main(): Promise<void> {
 	console.log("\n[smoke] firing session_compact, then re-reading the same file:");
 	await fake.emit("session_compact", {});
 	const reInject = await fake.emit("tool_result", makeReadEvent(buttonPath));
-	console.log(
-		`  re-inject result: ${reInject === undefined ? "undefined" : "<patched again>"}`,
-	);
+	console.log(`  re-inject result: ${reInject === undefined ? "undefined" : "<patched again>"}`);
 
 	await fixture.cleanup();
 	console.log("\n[smoke] OK");
