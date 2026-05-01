@@ -85,13 +85,13 @@ describe("truncateBytes", () => {
 
 	it("handles 3-byte UTF-8 characters at the boundary safely", () => {
 		// given
-		const content = "한글한글한글";
+		const content = "あいあいあい";
 
 		// when
 		const result = truncateBytes(content, 8);
 
 		// then
 		expect(result.truncated).toBe(true);
-		expect(result.result).toBe("한글");
+		expect(result.result).toBe("あい");
 	});
 });
