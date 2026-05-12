@@ -214,4 +214,10 @@ The pi-mono port adds:
 
 [MIT](LICENSE) © YeonGyu Kim
 
+## Related
+
+- [senpi](https://github.com/code-yeongyu/senpi) — the fork/runtime these extensions are extracted from.
+- [Ultraworkers Discord](https://discord.gg/PUwSMR9XNk) — community link from the senpi README.
+- [Dori](https://sisyphuslabs.ai) — the product powered by senpi under the hood.
+
 Heavily inspired by, and grateful to, [omo (oh-my-openagent)](https://github.com/code-yeongyu/oh-my-openagent). The pi-mono coding-agent and its extension API are by [Mario Zechner](https://github.com/badlogic) — see [pi-mono](https://github.com/badlogic/pi-mono).
