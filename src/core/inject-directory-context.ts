@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { resolveAndContain } from "./containment.js";
+import { InjectionFileReadError } from "./errors.js";
 import { findAgentsMdUp } from "./find-agents-md-up.js";
 import { formatDirectoryContext } from "./format.js";
 import type { InjectionCache } from "./injection-cache.js";
@@ -27,7 +28,7 @@ const EMPTY_RESULT: InjectionResult = Object.freeze({
 	injectedText: "",
 	injectedFiles: [],
 	errors: [],
-}) as InjectionResult;
+} satisfies InjectionResult);
 
 export async function injectDirectoryContext(input: InjectDirectoryContextInput): Promise<InjectionResult> {
 	const config = resolveConfig(input.config);
@@ -60,7 +61,7 @@ export async function injectDirectoryContext(input: InjectDirectoryContextInput)
 		} catch (error) {
 			errors.push({
 				path: agentsPath,
-				error: error instanceof Error ? error : new Error(String(error)),
+				error: new InjectionFileReadError(agentsPath, error),
 			});
 			continue;
 		}

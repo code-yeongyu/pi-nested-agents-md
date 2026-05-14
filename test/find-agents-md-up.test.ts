@@ -1,3 +1,6 @@
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { findAgentsMdUp } from "../src/core/find-agents-md-up.js";
 import { createTestTree, type TestTree } from "./fixtures/create-tree.js";
@@ -177,6 +180,26 @@ describe("findAgentsMdUp", () => {
 			expect(found).toEqual([]);
 		} finally {
 			await tree.cleanup();
+		}
+	});
+
+	it("stops at real directory boundary instead of matching a shared path prefix", async () => {
+		// given
+		const baseDir = await mkdtemp(join(tmpdir(), "nested-agents-boundary-"));
+		const rootDir = join(baseDir, "foo");
+		const siblingDir = join(baseDir, "foobar");
+		const startDir = join(siblingDir, "child");
+		await mkdir(rootDir, { recursive: true });
+		await mkdir(startDir, { recursive: true });
+		await writeFile(join(siblingDir, "AGENTS.md"), "# sibling", "utf-8");
+		try {
+			// when
+			const found = await findAgentsMdUp({ startDir, rootDir });
+
+			// then
+			expect(found).toEqual([]);
+		} finally {
+			await rm(baseDir, { recursive: true, force: true });
 		}
 	});
 });
