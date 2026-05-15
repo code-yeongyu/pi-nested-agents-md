@@ -1,5 +1,4 @@
 export const DEFAULT_FILE_NAMES = ["AGENTS.md"] as const;
-export const FALLBACK_FILE_NAMES = ["AGENTS.md", "CLAUDE.md"] as const;
 export const DEFAULT_MAX_BYTES_PER_FILE = 32 * 1024;
 export const DEFAULT_MAX_BYTES_PER_READ = 128 * 1024;
 

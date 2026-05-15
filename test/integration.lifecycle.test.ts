@@ -18,10 +18,10 @@ interface ReadToolResultEvent {
 	details?: unknown;
 }
 
-function makeReadEvent(path: string, content = "original"): ReadToolResultEvent {
+function makeReadEvent(path: string, content = "original", toolCallId = "call-1"): ReadToolResultEvent {
 	return {
 		type: "tool_result",
-		toolCallId: "call-1",
+		toolCallId,
 		toolName: "read",
 		input: { path },
 		content: [{ type: "text", text: content }],
@@ -60,6 +60,41 @@ describe("lifecycle integration", () => {
 
 			// then
 			expect(afterCompact?.content).toBeDefined();
+			expect(afterCompact?.content[1]?.text).toContain("# src rules");
+		} finally {
+			await tree.cleanup();
+		}
+	});
+
+	it("keeps nested AGENTS.md deduped across tool calls until session_compact resets it", async () => {
+		// given
+		const tree = await createTestTree({
+			"src/AGENTS.md": "# src rules",
+			"src/file.ts": "x",
+		});
+		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
+		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		try {
+			await fake.emit("session_start", { reason: "startup" });
+			const first = (await fake.emit(
+				"tool_result",
+				makeReadEvent(tree.path("src/file.ts"), "original", "call-1"),
+			)) as { content: TextBlock[] } | undefined;
+			const cached = (await fake.emit(
+				"tool_result",
+				makeReadEvent(tree.path("src/file.ts"), "original", "call-2"),
+			)) as { content?: TextBlock[] } | undefined;
+			expect(first?.content[1]?.text).toContain("# src rules");
+			expect(cached).toBeUndefined();
+
+			// when
+			await fake.emit("session_compact", {});
+			const afterCompact = (await fake.emit(
+				"tool_result",
+				makeReadEvent(tree.path("src/file.ts"), "original", "call-3"),
+			)) as { content: TextBlock[] } | undefined;
+
+			// then
 			expect(afterCompact?.content[1]?.text).toContain("# src rules");
 		} finally {
 			await tree.cleanup();

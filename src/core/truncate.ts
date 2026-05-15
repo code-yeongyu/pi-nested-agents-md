@@ -1,4 +1,5 @@
 const REPLACEMENT_CHAR = "\uFFFD";
+const TEXT_ENCODER = new TextEncoder();
 
 export interface TruncationResult {
 	result: string;
@@ -8,8 +9,7 @@ export interface TruncationResult {
 }
 
 export function truncateBytes(content: string, maxBytes: number): TruncationResult {
-	const encoder = new TextEncoder();
-	const bytes = encoder.encode(content);
+	const bytes = TEXT_ENCODER.encode(content);
 	if (bytes.byteLength <= maxBytes) {
 		return {
 			result: content,
@@ -25,7 +25,7 @@ export function truncateBytes(content: string, maxBytes: number): TruncationResu
 		decoded = decoded.slice(0, -1);
 	}
 
-	const finalBytes = encoder.encode(decoded).byteLength;
+	const finalBytes = TEXT_ENCODER.encode(decoded).byteLength;
 	return {
 		result: decoded,
 		truncated: true,
