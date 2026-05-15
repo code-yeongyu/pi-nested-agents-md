@@ -1,5 +1,5 @@
 import { constants, promises as fsPromises } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, isAbsolute, join, relative } from "node:path";
 import { DEFAULT_FILE_NAMES } from "./types.js";
 
 export interface FindAgentsMdUpInput {
@@ -28,11 +28,16 @@ export async function findAgentsMdUp(input: FindAgentsMdUpInput): Promise<string
 		if (isRoot) break;
 		const parent = dirname(current);
 		if (parent === current) break;
-		if (!parent.startsWith(input.rootDir)) break;
+		if (!isWithinRoot(input.rootDir, parent)) break;
 		current = parent;
 	}
 
 	return collected.reverse();
+}
+
+function isWithinRoot(rootDir: string, candidate: string): boolean {
+	const relativePath = relative(rootDir, candidate);
+	return relativePath === "" || (!relativePath.startsWith("..") && !isAbsolute(relativePath));
 }
 
 async function fileExists(path: string): Promise<boolean> {

@@ -1,5 +1,6 @@
-import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
-import { isReadToolResult } from "@mariozechner/pi-coding-agent";
+import type { TextContent } from "@earendil-works/pi-ai";
+import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { isReadToolResult } from "@earendil-works/pi-coding-agent";
 import { injectDirectoryContext } from "./core/inject-directory-context.js";
 import { InjectionCache } from "./core/injection-cache.js";
 import { getSessionKey } from "./core/session-key.js";
@@ -26,6 +27,7 @@ export default function nestedAgentsMd(pi: ExtensionAPI): void {
 	const cache = new InjectionCache();
 	const filesPerSession = new Map<string, Map<string, InjectedFileMeta>>();
 	const errorsPerSession = new Map<string, boolean>();
+	// Widget visibility is extension-scoped because command registration currently has no session-local state hook.
 	let widgetVisible = false;
 	let disabled = false;
 
@@ -77,9 +79,8 @@ export default function nestedAgentsMd(pi: ExtensionAPI): void {
 		updateStatus(ctx, cache, sessionKey, hasErrors);
 		if (widgetVisible) updateWidget(ctx, true, [...metaMap.values()]);
 
-		return {
-			content: [...event.content, { type: "text" as const, text: result.injectedText }],
-		};
+		const textBlock: TextContent = { type: "text", text: result.injectedText };
+		return { content: [...event.content, textBlock] };
 	});
 
 	pi.on("session_compact", async (_event, ctx) => {
