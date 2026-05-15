@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/github/license/code-yeongyu/pi-nested-agents-md?style=flat-square)](LICENSE)
 [![node](https://img.shields.io/node/v/@code-yeongyu/pi-nested-agents-md?style=flat-square)](package.json)
 
-> **From [omo (oh-my-openagent)](https://github.com/code-yeongyu/oh-my-openagent)** — ported to [pi-mono](https://github.com/badlogic/pi-mono)'s coding-agent extension API.
+> **From [omo (oh-my-openagent)](https://github.com/code-yeongyu/oh-my-openagent)** — ported to [pi-mono](https://github.com/earendil-works/pi-mono)'s coding-agent extension API.
 
 A pi-mono coding-agent extension that automatically injects nearby `AGENTS.md` files into the agent's context whenever it reads a file in a nested directory. When the agent reads `src/components/Button.tsx`, this extension finds `src/AGENTS.md` and `src/components/AGENTS.md`, attaches their contents to the read tool result, and the agent gets the surrounding directory's rules without you having to paste them yourself.
 
@@ -29,7 +29,7 @@ Real codebases are layered. Your repo's root `AGENTS.md` describes house rules. 
 
 ## Installation
 
-This extension follows pi-mono's standard discovery and packaging conventions documented in [`pi-mono/packages/coding-agent/docs/extensions.md`](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/extensions.md).
+This extension follows pi-mono's standard discovery and packaging conventions documented in [`pi-mono/packages/coding-agent/docs/extensions.md`](https://github.com/earendil-works/pi-mono/blob/main/packages/coding-agent/docs/extensions.md).
 
 ### Option 1 — global, auto-discovered
 
@@ -220,4 +220,4 @@ The pi-mono port adds:
 - [Ultraworkers Discord](https://discord.gg/PUwSMR9XNk) — community link from the senpi README.
 - [Dori](https://sisyphuslabs.ai) — the product powered by senpi under the hood.
 
-Heavily inspired by, and grateful to, [omo (oh-my-openagent)](https://github.com/code-yeongyu/oh-my-openagent). The pi-mono coding-agent and its extension API are by [Mario Zechner](https://github.com/badlogic) — see [pi-mono](https://github.com/badlogic/pi-mono).
+Heavily inspired by, and grateful to, [omo (oh-my-openagent)](https://github.com/code-yeongyu/oh-my-openagent). The pi-mono coding-agent and its extension API are maintained by [Earendil Works](https://github.com/earendil-works) — see [pi-mono](https://github.com/earendil-works/pi-mono).
