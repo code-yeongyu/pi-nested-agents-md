@@ -86,7 +86,7 @@ export function buildDebugRecord(input: {
 function displayPath(cwd: string, absolutePath: string): string {
 	if (!isAbsolute(absolutePath)) return absolutePath;
 	const rel = relative(cwd, absolutePath);
-	if (!rel || rel.startsWith("..")) return absolutePath;
+	if (rel === "" || rel === ".." || rel.startsWith("../") || isAbsolute(rel)) return absolutePath;
 	return rel;
 }
 
