@@ -1,6 +1,6 @@
-import type { TextContent } from "@mariozechner/pi-ai";
-import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
-import { isReadToolResult } from "@mariozechner/pi-coding-agent";
+import type { TextContent } from "@earendil-works/pi-ai";
+import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { isReadToolResult } from "@earendil-works/pi-coding-agent";
 import { injectDirectoryContext } from "./core/inject-directory-context.js";
 import { InjectionCache } from "./core/injection-cache.js";
 import { getSessionKey } from "./core/session-key.js";
