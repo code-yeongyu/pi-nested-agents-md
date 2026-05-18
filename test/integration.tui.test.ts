@@ -36,7 +36,7 @@ describe("TUI integration", () => {
 			"src/file.ts": "x",
 		});
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 
@@ -63,7 +63,7 @@ describe("TUI integration", () => {
 			sessionFile: "/sessions/A.jsonl",
 			hasUI: false,
 		});
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 
@@ -92,7 +92,7 @@ describe("TUI integration", () => {
 			sessionFile: "/sessions/A.jsonl",
 			flagValues: { "no-nested-agents": true },
 		});
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 
@@ -116,7 +116,7 @@ describe("TUI integration", () => {
 			"src/components/Button.tsx": "x",
 		});
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 			await fake.emit("tool_result", makeReadEvent(tree.path("src/components/Button.tsx")));
@@ -143,7 +143,7 @@ describe("TUI integration", () => {
 			"src/file.ts": "x",
 		});
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 			await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")));
@@ -168,7 +168,7 @@ describe("TUI integration", () => {
 			"src/file.ts": "x",
 		});
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 			await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")));
@@ -195,7 +195,7 @@ describe("TUI integration", () => {
 			"src/file.ts": "x",
 		});
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 			await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")));
@@ -217,7 +217,7 @@ describe("TUI integration", () => {
 
 		// when
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 
 		// then
 		expect(fake.captured.registeredFlags).toContain("no-nested-agents");

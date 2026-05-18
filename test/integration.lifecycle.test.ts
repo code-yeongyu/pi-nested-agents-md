@@ -37,7 +37,7 @@ describe("lifecycle integration", () => {
 			"src/file.ts": "x",
 		});
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 			const first = (await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")))) as
@@ -73,7 +73,7 @@ describe("lifecycle integration", () => {
 			"src/file.ts": "x",
 		});
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 			const first = (await fake.emit(
@@ -108,7 +108,7 @@ describe("lifecycle integration", () => {
 			"src/file.ts": "x",
 		});
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 			const aFirst = (await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")))) as
@@ -137,7 +137,7 @@ describe("lifecycle integration", () => {
 			"src/file.ts": "x",
 		});
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 			await fake.emit("tool_result", makeReadEvent(tree.path("src/file.ts")));
@@ -162,7 +162,7 @@ describe("lifecycle integration", () => {
 			"src/file.ts": "x",
 		});
 		const fake = createFakePi({ cwd: tree.root, sessionFile: "/sessions/A.jsonl" });
-		nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+		nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 		try {
 			await fake.emit("session_start", { reason: "startup" });
 			const original = makeReadEvent(tree.path("src/file.ts"), "block-A");

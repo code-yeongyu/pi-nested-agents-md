@@ -93,9 +93,17 @@ export function createFakePi(options: FakePiOptions): FakePi {
 		},
 		ui: {
 			theme: { fg: (color, text) => `[${color}]${text}[/${color}]` },
-			notify: (message, level) => captured.notifications.push({ message, level }),
+			notify: (message, level) => {
+				const notification: CapturedNotify = { message };
+				if (level !== undefined) notification.level = level;
+				captured.notifications.push(notification);
+			},
 			setStatus: (key, text) => captured.statuses.push({ key, text }),
-			setWidget: (key, lines, opts) => captured.widgets.push({ key, lines, placement: opts?.placement }),
+			setWidget: (key, lines, opts) => {
+				const widget: CapturedWidget = { key, lines };
+				if (opts?.placement !== undefined) widget.placement = opts.placement;
+				captured.widgets.push(widget);
+			},
 		},
 	};
 

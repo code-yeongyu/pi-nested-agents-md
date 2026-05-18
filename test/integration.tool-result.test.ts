@@ -49,8 +49,8 @@ async function runMiddleware(
 const nestedAgentsHandler: Handler = async (event, ctx) => {
 	if (event.toolName !== "read") return undefined;
 	if (event.isError) return undefined;
-	const filePath = event.input.path as string | undefined;
-	if (!filePath) return undefined;
+	const filePath = event.input["path"];
+	if (typeof filePath !== "string" || filePath.length === 0) return undefined;
 	const hasText = event.content.some((b) => b.type === "text");
 	if (!hasText) return undefined;
 
@@ -63,8 +63,9 @@ const nestedAgentsHandler: Handler = async (event, ctx) => {
 
 	if (!result.injectedText) return undefined;
 
+	const injectedBlock: TextBlock = { type: "text", text: result.injectedText };
 	return {
-		content: [...event.content, { type: "text", text: result.injectedText } as TextBlock],
+		content: [...event.content, injectedBlock],
 	};
 };
 

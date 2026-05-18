@@ -40,7 +40,7 @@ async function main(): Promise<void> {
 		sessionFile: "/tmp/smoke-session.jsonl",
 	});
 
-	nestedAgentsMd(fake.pi as unknown as Parameters<typeof nestedAgentsMd>[0]);
+	nestedAgentsMd(fake.pi as Parameters<typeof nestedAgentsMd>[0]);
 
 	console.log(`[smoke] registered flags: ${fake.captured.registeredFlags.join(", ")}`);
 	console.log(`[smoke] registered commands: ${fake.captured.registeredCommands.join(", ")}`);
