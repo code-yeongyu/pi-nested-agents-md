@@ -48,12 +48,12 @@
 		"@earendil-works/pi-coding-agent": "*"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.16",
-		"@types/node": "^25.9.2",
-		"@typescript/native-preview": "^7.0.0-dev.20260610.1",
-		"tsx": "^4.22.4",
-		"typescript": "^6.0.3",
-		"vitest": "^4.1.8"
+		"@biomejs/biome": "^2.5.3",
+		"@types/node": "^26.1.1",
+		"@typescript/native-preview": "^7.0.0-dev.20260707.2",
+		"tsx": "^4.23.0",
+		"typescript": "^7.0.2",
+		"vitest": "^4.1.10"
 	},
 	"engines": {
 		"node": ">=22.19.0"
