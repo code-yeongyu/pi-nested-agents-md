@@ -187,7 +187,7 @@ npm run test:watch # vitest watch mode
 The test suite includes:
 
 - **Unit tests** for each pure module (finder, containment, cache, truncate, format).
-- **Orchestrator tests** for `injectDirectoryContext` covering happy path, symlink escape, sibling-root prefix bug, dedup, EACCES, truncation, deep nesting.
+- **Orchestrator tests** for `injectDirectoryContext` covering happy path, symlink escape, sibling-root prefix bug, dedup, deterministic `EISDIR` read errors, truncation, deep nesting.
 - **Tool-result middleware tests** that simulate pi-mono's chained `tool_result` handler model and prove our handler appends to the latest content (not the original event content).
 - **Lifecycle integration tests** that drive the full extension via a fake `pi` API harness — proving cache reset on `session_compact`/`session_shutdown`, multi-session isolation, and the original-content-as-prefix invariant.
 - **TUI integration tests** asserting status/widget calls under `hasUI=true`/`false`, the `--no-nested-agents` inert mode, slash-command toggle on/off, themed line rendering, the truncation warning line, and the debug entry shape.
