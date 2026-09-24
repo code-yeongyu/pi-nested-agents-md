@@ -1,6 +1,6 @@
 {
 	"name": "@code-yeongyu/pi-nested-agents-md",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Nested AGENTS.md injection for pi-mono coding-agent. Ported from oh-my-openagent (omo).",
 	"type": "module",
 	"private": false,
@@ -48,12 +48,15 @@
 		"@earendil-works/pi-coding-agent": "*"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.5.5",
-		"@types/node": "^25.9.2",
-		"@typescript/native-preview": "^7.0.0-dev.20260610.1",
-		"tsx": "^4.22.4",
-		"typescript": "^7.0.2",
-		"vitest": "^4.1.8"
+		"@biomejs/biome": "2.5.14",
+		"@earendil-works/pi-ai": "0.87.1",
+		"@earendil-works/pi-coding-agent": "0.87.1",
+		"@types/node": "26.6.2",
+		"@typescript/native-preview": "7.0.0-dev.20260707.2",
+		"@vitest/coverage-v8": "5.0.1",
+		"tsx": "4.23.15",
+		"typescript": "7.0.2",
+		"vitest": "5.0.1"
 	},
 	"engines": {
 		"node": ">=22.19.0"
