@@ -1,4 +1,3 @@
-import { chmod } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 import { injectDirectoryContext } from "../src/core/inject-directory-context.js";
 import { InjectionCache } from "../src/core/injection-cache.js";
@@ -147,15 +146,14 @@ describe("injectDirectoryContext", () => {
 		}
 	});
 
-	it("captures unreadable AGENTS.md as an error without throwing and without injecting that file", async () => {
+	it("captures an AGENTS.md directory read as an error without throwing or injecting it", async () => {
 		// given
 		const tree = await createTestTree({
-			"src/AGENTS.md": "# secret rules",
 			"src/file.ts": "x",
 		});
 		const cache = new InjectionCache();
 		try {
-			await chmod(tree.path("src/AGENTS.md"), 0o000);
+			await tree.addDir("src/AGENTS.md");
 
 			// when
 			const result = await injectDirectoryContext({
@@ -171,7 +169,6 @@ describe("injectDirectoryContext", () => {
 			expect(result.errors).toHaveLength(1);
 			expect(result.errors[0]?.path).toBe(tree.path("src/AGENTS.md"));
 		} finally {
-			await chmod(tree.path("src/AGENTS.md"), 0o644).catch(() => undefined);
 			await tree.cleanup();
 		}
 	});

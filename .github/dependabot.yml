@@ -8,7 +8,7 @@ updates:
     groups:
       pi-mono:
         patterns:
-          - "@mariozechner/*"
+          - "@earendil-works/*"
       dev:
         dependency-type: development
 

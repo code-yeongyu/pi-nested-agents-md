@@ -39,7 +39,7 @@ Clone (or `git submodule add`) into pi's global extensions directory:
 mkdir -p ~/.pi/agent/extensions
 git clone https://github.com/code-yeongyu/pi-nested-agents-md ~/.pi/agent/extensions/pi-nested-agents-md
 cd ~/.pi/agent/extensions/pi-nested-agents-md
-npm install --omit=dev
+npm install --omit=dev   # or: bun install --production
 ```
 
 `pi` will auto-discover the extension via the `pi.extensions` field in `package.json` and load it for every session in every project.
@@ -52,7 +52,7 @@ Drop it inside your project's `.pi/extensions/`:
 mkdir -p .pi/extensions
 git clone https://github.com/code-yeongyu/pi-nested-agents-md .pi/extensions/pi-nested-agents-md
 cd .pi/extensions/pi-nested-agents-md
-npm install --omit=dev
+npm install --omit=dev   # or: bun install --production
 ```
 
 Project-local extensions only activate when `pi` is launched from this project's working directory.
@@ -177,17 +177,19 @@ The pi adapter (`src/index.ts`) only wires events and pushes results to the UI r
 
 ## Development
 
+Bun 1.4.2 is the primary toolchain. npm remains supported for consumers (`npm ci && npm test`).
+
 ```bash
-npm install        # installs vitest, typescript, pi types
-npm test           # runs vitest --run (62 tests)
-npm run check      # tsc --noEmit
-npm run test:watch # vitest watch mode
+bun install        # installs vitest, typescript, pi types (or: npm install)
+bun test           # runs vitest --run
+bun run check      # tsgo --noEmit && biome check .
+bun run test:watch # vitest watch mode
 ```
 
 The test suite includes:
 
 - **Unit tests** for each pure module (finder, containment, cache, truncate, format).
-- **Orchestrator tests** for `injectDirectoryContext` covering happy path, symlink escape, sibling-root prefix bug, dedup, EACCES, truncation, deep nesting.
+- **Orchestrator tests** for `injectDirectoryContext` covering happy path, symlink escape, sibling-root prefix bug, dedup, deterministic `EISDIR` read errors, truncation, deep nesting.
 - **Tool-result middleware tests** that simulate pi-mono's chained `tool_result` handler model and prove our handler appends to the latest content (not the original event content).
 - **Lifecycle integration tests** that drive the full extension via a fake `pi` API harness — proving cache reset on `session_compact`/`session_shutdown`, multi-session isolation, and the original-content-as-prefix invariant.
 - **TUI integration tests** asserting status/widget calls under `hasUI=true`/`false`, the `--no-nested-agents` inert mode, slash-command toggle on/off, themed line rendering, the truncation warning line, and the debug entry shape.
