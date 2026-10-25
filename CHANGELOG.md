@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- CI and the development docs use Bun 1.4.4 (was 1.4.2).
+
 ## 0.1.1 - 2026-09-24
 
 ### Changed

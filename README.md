@@ -177,7 +177,7 @@ The pi adapter (`src/index.ts`) only wires events and pushes results to the UI r
 
 ## Development
 
-Bun 1.4.2 is the primary toolchain. npm remains supported for consumers (`npm ci && npm test`).
+Bun 1.4.4 is the primary toolchain. npm remains supported for consumers (`npm ci && npm test`).
 
 ```bash
 bun install        # installs vitest, typescript, pi types (or: npm install)
